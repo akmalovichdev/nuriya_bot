@@ -4,19 +4,17 @@ from datetime import datetime
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from dotenv import load_dotenv
-import os
 import logging
 import db
+import config
 
 logging.basicConfig(level=logging.INFO)
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
 GROUP_ID = -1002175722641
 CHANNEL_ID = -1002198604799
 ADMIN_ID = 7055308233
 
-bot = Bot(token=BOT_TOKEN)
+bot = Bot(token=config.botTOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
 class Register(StatesGroup):
