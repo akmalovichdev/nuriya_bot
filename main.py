@@ -7,6 +7,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from dotenv import load_dotenv
 import os
 import logging
+import db
 
 logging.basicConfig(level=logging.INFO)
 
@@ -39,6 +40,9 @@ async def handle_photo(message: types.Message):
 
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
+    if not db.exist.user(message.from_user.id):
+        db.add.user(message.from_user.id, message.from_user.full_name)
+
     menu = InlineKeyboardMarkup()
     button2 = InlineKeyboardButton(text="Xabar yuborish", callback_data='register')
     button3 = InlineKeyboardButton(text='Kanal', url='https://t.me/@nuriyapastels')
